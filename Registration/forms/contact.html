@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title></title>
+</head>
+<body>
+&lt;?php<br/>
+  /**<br/>
+  * Requires the &quot;PHP Email Form&quot; library<br/>
+  * The &quot;PHP Email Form&quot; library is available only in the pro version of the template<br/>
+  * The library should be uploaded to: vendor/php&ndash;email&ndash;form/php&ndash;email&ndash;form.php<br/>
+  * For more info and help: https://bootstrapmade.com/php&ndash;email&ndash;form/<br/>
+  */<br/>
+<br/>
+  // Replace contact@example.com with your real receiving email address<br/>
+  $receiving_email_address = &#39;contact@example.com&#39;;<br/>
+<br/>
+  if( file_exists($php_email_form = &#39;../assets/vendor/php&ndash;email&ndash;form/php&ndash;email&ndash;form.php&#39; )) {<br/>
+    include( $php_email_form );<br/>
+  } else {<br/>
+    die( &#39;Unable to load the &quot;PHP Email Form&quot; Library!&#39;);<br/>
+  }<br/>
+<br/>
+  $contact = new PHP_Email_Form;<br/>
+  $contact&ndash;&gt;ajax = true;<br/>
+  <br/>
+  $contact&ndash;&gt;to = $receiving_email_address;<br/>
+  $contact&ndash;&gt;from_name = $_POST[&#39;name&#39;];<br/>
+  $contact&ndash;&gt;from_email = $_POST[&#39;email&#39;];<br/>
+  $contact&ndash;&gt;subject = $_POST[&#39;subject&#39;];<br/>
+<br/>
+  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials<br/>
+  /*<br/>
+  $contact&ndash;&gt;smtp = array(<br/>
+    &#39;host&#39; =&gt; &#39;example.com&#39;,<br/>
+    &#39;username&#39; =&gt; &#39;example&#39;,<br/>
+    &#39;password&#39; =&gt; &#39;pass&#39;,<br/>
+    &#39;port&#39; =&gt; &#39;587&#39;<br/>
+  );<br/>
+  */<br/>
+<br/>
+  $contact&ndash;&gt;add_message( $_POST[&#39;name&#39;], &#39;From&#39;);<br/>
+  $contact&ndash;&gt;add_message( $_POST[&#39;email&#39;], &#39;Email&#39;);<br/>
+  $contact&ndash;&gt;add_message( $_POST[&#39;message&#39;], &#39;Message&#39;, 10);<br/>
+<br/>
+  echo $contact&ndash;&gt;send();<br/>
+?&gt;</body></html>
